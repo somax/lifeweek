@@ -66,7 +66,7 @@
                 buildWeekBox(i<passWeekNum);
             }
 
-            elEnd.innerHTML = yearsNum + Number(birthday.substr(0,4)) + birthday.substr(4)
+            elEnd.innerHTML = (yearsNum + Number(birthday.substr(0,4))) + birthday.substr(4)
         }
 
 
@@ -77,7 +77,7 @@
         }
 
         function updateYear(value) {
-            yearsNum = value
+            yearsNum = Number(value)
         } 
 
         function updateBirthday(value) {
