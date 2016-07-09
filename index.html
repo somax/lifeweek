@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Life Week</title>
+    <style type="text/css">
+    .aweek {
+        width: 10px;
+        height: 10px;
+        background-color: rgb(137, 182, 25);
+        float: left;
+        border: 1px solid #fff; 
+    }
+    .pass{
+        background-color: #efefef;
+    }
+
+    #theEnd{
+        clear:both;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Life Week</h1>
+    <form onsubmit="return false">
+        
+    Years you will be live: <input type="text" id="years2live" value="90" onchange="updateYear(this.value)">
+    Your birthday (yyyy-mm-dd): <input type="text" id="birthday" onchange="updateBirthday(this.value)">
+
+    <input type="submit" name="ok" value="confirm" onclick="buildAll()">
+
+    </form>
+
+    <div id="weeks"></div>
+
+    <div id="theEnd"></div>
+
+
+    <script type="text/javascript">
+        var yearsNum = 90;
+        var birthday = '';
+        var elWeeks = document.getElementById('weeks');
+        var elEnd = document.getElementById('theEnd');
+
+        function buildAll() {
+            if(!birthday){
+                alert('please give the birthday.');
+                return;
+            }
+
+
+            var _birthday = new Date(birthday);
+            if( _birthday.toString() == "Invalid Date" ){
+                alert('Invalid Date, check the birthday.');
+                return;
+            }
+
+            elWeeks.innerHTML = '';
+
+            var passDaysNum = (new Date() - _birthday) / 86400000;
+
+            var weeksNum = Math.round(yearsNum*365 / 7);
+            var passWeekNum = Math.round(passDaysNum / 7);
+            for (var i = 0; i < weeksNum; i++) {
+                buildWeekBox(i<passWeekNum);
+            }
+
+            elEnd.innerHTML = yearsNum + Number(birthday.substr(0,4)) + birthday.substr(4)
+        }
+
+
+        function buildWeekBox(isPass) {
+            var aweek = document.createElement('div');
+            aweek.className = isPass ? 'aweek pass' : 'aweek';
+            elWeeks.appendChild(aweek);
+        }
+
+        function updateYear(value) {
+            yearsNum = value
+        } 
+
+        function updateBirthday(value) {
+            birthday = value
+        }
+
+        // buildAll();
+
+    </script>
+</body>
+
+</html>
